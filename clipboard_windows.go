@@ -7,6 +7,7 @@
 package clipboard
 
 import (
+	"fmt"
 	"syscall"
 	"time"
 	"unsafe"
@@ -45,6 +46,10 @@ func waitOpenClipboard() error {
 			return nil
 		}
 		time.Sleep(time.Millisecond)
+	}
+	// if the for has not returned
+	if err = nil {
+		err = fmt.Errorf("openclipboard timedout")
 	}
 	return err
 }
